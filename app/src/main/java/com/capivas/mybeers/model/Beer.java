@@ -1,6 +1,8 @@
 package com.capivas.mybeers.model;
 
-public class Beer {
+import java.io.Serializable;
+
+public class Beer implements Serializable {
     private Long id;
     private String name;
     private String tagline;

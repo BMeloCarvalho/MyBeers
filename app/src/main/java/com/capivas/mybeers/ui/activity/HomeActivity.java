@@ -1,15 +1,17 @@
 package com.capivas.mybeers.ui.activity;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.capivas.mybeers.R;
 import com.capivas.mybeers.adapter.BeersAdapter;
 import com.capivas.mybeers.model.Beer;
 import com.capivas.mybeers.retrofit.RetrofitWrapper;
-import com.capivas.mybeers.util.Util;
 
 import java.util.List;
 
@@ -27,6 +29,15 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         beersList = findViewById(R.id.home_beers_list);
+        beersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Beer beer = (Beer) beersList.getItemAtPosition(position);
+                Intent toDetails = new Intent(HomeActivity.this, DetailActivity.class);
+                toDetails.putExtra("beer", beer);
+                startActivity(toDetails);
+            }
+        });
 
         loadBeers();
     }

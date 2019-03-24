@@ -1,5 +1,9 @@
 package com.capivas.mybeers.util;
 
+import android.content.Context;
+import android.widget.ImageView;
+
+import com.bumptech.glide.Glide;
 import com.capivas.mybeers.model.Beer;
 
 import java.util.ArrayList;
@@ -26,5 +30,11 @@ public class Util {
         beers.add(beer3);
 
         return beers;
+    }
+
+    public static void setImageViewContentByUrl(ImageView imageView, String url, Context context) {
+        Glide.with(context)
+                .load(url)
+                .into(imageView);
     }
 }

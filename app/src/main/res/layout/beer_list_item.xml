@@ -25,14 +25,16 @@
             android:id="@+id/list_item_name"
             android:textSize="20sp"
             android:textStyle="bold"
-            android:paddingLeft="10dp"/>
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/list_item_tagline"
             android:textSize="15sp"
-            android:paddingLeft="10dp"/>
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp"/>
     </LinearLayout>
 
 </LinearLayout>

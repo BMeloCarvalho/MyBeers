@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.capivas.mybeers.R;
 import com.capivas.mybeers.model.Beer;
+import com.capivas.mybeers.util.Util;
 
 import java.util.List;
 
@@ -55,9 +56,7 @@ public class BeersAdapter extends BaseAdapter {
         taglineField.setText(beer.getTagline());
 
         ImageView photoField = view.findViewById(R.id.list_item_photo);
-        Glide.with(context)
-                .load(beer.getImage_url())
-                .into(photoField);
+        Util.setImageViewContentByUrl(photoField, beer.getImage_url(), context);
 
         return view;
     }
