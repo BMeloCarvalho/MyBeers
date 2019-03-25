@@ -8,6 +8,7 @@ public class Beer implements Serializable {
     private String tagline;
     private String description;
     private String image_url;
+    private boolean isFavorite = false;
 
     public Beer() {
 
@@ -59,5 +60,13 @@ public class Beer implements Serializable {
 
     public void setImage_url(String image_url) {
         this.image_url = image_url;
+    }
+
+    public boolean isFavorite() {
+        return this.isFavorite;
+    }
+
+    public void setIsFavorite(boolean isFavorite) {
+        this.isFavorite = isFavorite;
     }
 }

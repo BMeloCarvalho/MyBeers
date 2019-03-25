@@ -147,19 +147,14 @@ public class PaginationRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         private TextView nameField;
         private TextView taglineField;
         private ImageView photoField;
+        private ImageView favoriteIconField;
         private Beer beer;
 
         public BeerViewHolder(View itemView) {
             super(itemView);
-            nameField = itemView.findViewById(R.id.list_item_name);
-            taglineField = itemView.findViewById(R.id.list_item_tagline);
-            photoField = itemView.findViewById(R.id.list_item_photo);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClickListener.onItemClick(beer);
-                }
-            });
+            getFieldReferences(itemView);
+            setItemClick(itemView);
+            setFavoriteButtonClick(itemView);
         }
 
         public void bind(Beer beer) {
@@ -167,9 +162,49 @@ public class PaginationRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
             fillViewHolderFields(beer);
         }
 
+        private void getFieldReferences(View itemView) {
+            nameField = itemView.findViewById(R.id.list_item_name);
+            taglineField = itemView.findViewById(R.id.list_item_tagline);
+            photoField = itemView.findViewById(R.id.list_item_photo);
+            favoriteIconField = itemView.findViewById(R.id.list_favorite_icon);
+        }
+
+        private void setItemClick(View itemView) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    onItemClickListener.onItemClick(beer);
+                }
+            });
+        }
+
+        private void setFavoriteButtonClick(View itemView) {
+            View favoriteButton = itemView.findViewById(R.id.list_favorite_buttom);
+            favoriteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    beer.setIsFavorite(!beer.isFavorite());
+                    updateFavoriteIcon(beer);
+                    onItemClickListener.onFavoriteButtomClick(beer);
+                }
+            });
+        }
+
         private void fillViewHolderFields(Beer beer) {
             nameField.setText(beer.getName());
             taglineField.setText(beer.getTagline());
+            updateImageUrl(beer);
+            updateFavoriteIcon(beer);
+        }
+
+        private void updateFavoriteIcon(Beer beer) {
+            if (beer.isFavorite())
+                favoriteIconField.setImageResource(R.drawable.staron);
+            else
+                favoriteIconField.setImageResource(R.drawable.staroff);
+        }
+
+        private void updateImageUrl(Beer beer) {
             if(beer.getImage_url() != null)
                 Util.setImageViewContentByUrl(photoField, beer.getImage_url(), context);
             else

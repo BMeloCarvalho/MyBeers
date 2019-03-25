@@ -4,21 +4,25 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/colorSecondary"
     android:layout_marginTop="1dp"
-    android:layout_marginBottom="1dp">
+    android:layout_marginBottom="1dp"
+    android:weightSum="1">
 
     <ImageView
-        android:layout_width="64dp"
+        android:id="@+id/list_item_photo"
+        android:layout_width="0dp"
         android:layout_height="64dp"
         android:src="@drawable/placeholder"
         android:background="@color/colorSecondaryDark"
-        android:id="@+id/list_item_photo"
+        android:layout_weight="0.2"
         android:contentDescription="@string/list_item_photo_description"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_weight="0.65"
         android:layout_gravity="center_vertical">
 
         <TextView
@@ -27,6 +31,7 @@
             android:id="@+id/list_item_name"
             android:maxLines="1"
             android:textSize="20sp"
+            android:text="TESTE"
             android:textStyle="bold"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"/>
@@ -36,9 +41,24 @@
             android:layout_height="wrap_content"
             android:id="@+id/list_item_tagline"
             android:maxLines="1"
+            android:text="TESTasdasdasE asdaasdas asdsa sd asdsad asda asd"
             android:textSize="15sp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"/>
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/list_favorite_buttom"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.15"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/list_favorite_icon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/staroff"
+            android:contentDescription="@string/list_item_favorite_icon_description"/>
+    </LinearLayout>
 </LinearLayout>

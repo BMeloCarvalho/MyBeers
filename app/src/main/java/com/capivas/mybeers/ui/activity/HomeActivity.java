@@ -112,6 +112,11 @@ public class HomeActivity extends AppCompatActivity {
             public void onItemClick(Beer beer) {
                 sendBeerToDetailsActivity(beer);
             }
+
+            @Override
+            public void onFavoriteButtomClick(Beer beer) {
+                //TODO persist favorited beer
+            }
         });
     }
 
@@ -184,7 +189,6 @@ public class HomeActivity extends AppCompatActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                Log.e("SEARCH", "submited!!!");
                 if(!query.isEmpty()) {
                     currentQuery = query;
                     resetBeersList();

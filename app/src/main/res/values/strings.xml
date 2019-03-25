@@ -7,4 +7,5 @@
     <string name="home_menu_search">Search</string>
     <string name="search_hint">Search beers...</string>
     <string name="search_no_results">No results were found</string>
+    <string name="list_item_favorite_icon_description">Favorite icon</string>
 </resources>
