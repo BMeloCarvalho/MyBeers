@@ -4,4 +4,6 @@
     <string name="detail_screen_title">Beer Details</string>
     <string name="list_item_photo_description">A beer bottle</string>
     <string name="menu_home_detail">Detail</string>
+    <string name="home_menu_search">Search</string>
+    <string name="search_hint">Search beers...</string>
 </resources>

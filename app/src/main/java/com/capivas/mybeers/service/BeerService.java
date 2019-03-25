@@ -13,5 +13,9 @@ public interface BeerService {
     Call<List<Beer>> list();
 
     @GET("beers")
-    Call<List<Beer>> list(@Query("page") int page,@Query("per_page") int per_page);
+    Call<List<Beer>> list(@Query("page") int page, @Query("per_page") int per_page);
+
+    @GET("beers")
+    Call<List<Beer>> list(@Query("page") int currentPage, @Query("per_page") int perPage,
+                          @Query("beer_name") String currentQuery);
 }

@@ -1,5 +1,6 @@
 package com.capivas.mybeers.ui.activity;
 
+import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -7,8 +8,13 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.capivas.mybeers.R;
 import com.capivas.mybeers.model.Beer;
@@ -23,7 +29,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity{
     private static final int PAGE_START = 1;
     private static final int PER_PAGE = 25;
 
@@ -32,6 +38,7 @@ public class HomeActivity extends AppCompatActivity {
     private PaginationRecyclerViewAdapter adapter;
     private boolean isLoading = false;
     private int currentPage = PAGE_START;
+    private String currentQuery = null;
     private boolean isLastPage = false;
 
     @Override
@@ -41,6 +48,44 @@ public class HomeActivity extends AppCompatActivity {
 
         getFieldReferences();
         configRecyclerView();
+        loadNextPage();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_menu, menu);
+
+        configSearchView(menu);
+
+        return true;
+    }
+
+    private void configSearchView(Menu menu) {
+        SearchManager searchManager = (SearchManager) getSystemService(this.SEARCH_SERVICE);
+        MenuItem searchMenuItem = menu.findItem(R.id.home_menu_search);
+        SearchView searchView = (SearchView) searchMenuItem.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                invalidateOptionsMenu();
+                processQuery(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+                return false;
+            }
+        });
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+    }
+
+    private void processQuery(String query) {
+        adapter.clear();
+        currentQuery = query;
+        currentPage = PAGE_START;
         loadNextPage();
     }
 
@@ -93,7 +138,12 @@ public class HomeActivity extends AppCompatActivity {
 
     private void loadNextPage() {
         Log.d("loadNextPage", "loadNextPage: " + currentPage);
-        Call<List<Beer>> call = RetrofitWrapper.getBeerService().list(currentPage, PER_PAGE);
+        Call<List<Beer>> call;
+        if(currentQuery != null && !currentQuery.isEmpty())
+            call = RetrofitWrapper.getBeerService().list(currentPage, PER_PAGE, currentQuery);
+        else
+            call = RetrofitWrapper.getBeerService().list(currentPage, PER_PAGE);
+
         call.enqueue(new Callback<List<Beer>>() {
             @Override
             public void onResponse(Call<List<Beer>> call, Response<List<Beer>> response) {
