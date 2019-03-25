@@ -5,17 +5,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/home_beers_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="1dp"
-            android:paddingBottom="1dp"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/home_beers_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="1dp"
+        android:paddingBottom="1dp"/>
 
-        <ProgressBar
-            android:id="@+id/home_progress_bar"
+    <ProgressBar
+        android:id="@+id/home_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/colorSecondaryDark"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout
+        android:id="@+id/home_search_fail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:tint="@android:color/black"
+            android:src="@drawable/ic_search"/>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"/>
-
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="@string/search_no_results"/>
+    </LinearLayout>
 </RelativeLayout>

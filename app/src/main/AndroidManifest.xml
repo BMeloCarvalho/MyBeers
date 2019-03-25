@@ -20,11 +20,13 @@
             android:label="@string/home_screen_title">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.SEARCH" />-->
+            <!--</intent-filter>-->
             <meta-data
-                android:name="android.app.support.searchable"
+                android:name="android.app.searchable"
                 android:resource="@xml/searchable">
             </meta-data>
         </activity>
