@@ -13,11 +13,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.activity.DetailActivity"
-            android:label="@string/detail_screen_title">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.activity.HomeActivity"/>
-        </activity>
+            android:label="@string/detail_screen_title"
+            android:parentActivityName=".ui.activity.HomeActivity"/>
         <activity
             android:name=".ui.activity.HomeActivity"
             android:label="@string/home_screen_title">

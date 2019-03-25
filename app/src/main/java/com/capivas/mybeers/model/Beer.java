@@ -9,6 +9,10 @@ public class Beer implements Serializable {
     private String description;
     private String image_url;
 
+    public Beer() {
+
+    }
+
     public Beer(Long id, String name, String tagline, String description, String image_url) {
         this.id = id;
         this.name = name;

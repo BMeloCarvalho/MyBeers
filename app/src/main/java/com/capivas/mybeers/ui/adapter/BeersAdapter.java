@@ -1,4 +1,4 @@
-package com.capivas.mybeers.adapter;
+package com.capivas.mybeers.ui.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.capivas.mybeers.R;
 import com.capivas.mybeers.model.Beer;
 import com.capivas.mybeers.util.Util;
@@ -46,7 +45,7 @@ public class BeersAdapter extends BaseAdapter {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = convertView;
         if(view == null) {
-            view = inflater.inflate(R.layout.beer_list_item, parent, false);
+            view = inflater.inflate(R.layout.item_beer, parent, false);
         }
 
         TextView nameField = view.findViewById(R.id.list_item_name);
