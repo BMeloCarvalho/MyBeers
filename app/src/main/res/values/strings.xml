@@ -8,4 +8,6 @@
     <string name="search_hint">Search beers...</string>
     <string name="search_no_results">No results were found</string>
     <string name="list_item_favorite_icon_description">Favorite icon</string>
+    <string name="home_menu_favorites">Favorites</string>
+    <string name="favorites_screen_title">Favorites</string>
 </resources>

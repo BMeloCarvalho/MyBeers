@@ -55,7 +55,7 @@ public class BeersAdapter extends BaseAdapter {
         taglineField.setText(beer.getTagline());
 
         ImageView photoField = view.findViewById(R.id.list_item_photo);
-        Util.setImageViewContentByUrl(photoField, beer.getImage_url(), context);
+        Util.setImageViewContentByUrl(photoField, beer.getImageLocation(), context);
 
         return view;
     }

@@ -21,8 +21,8 @@ public class DetailActivity extends AppCompatActivity {
         Beer beer = (Beer) intent.getSerializableExtra("beer");
 
         ImageView photoField = findViewById(R.id.detail_photo);
-        if(beer.getImage_url() != null)
-            Util.setImageViewContentByUrl(photoField, beer.getImage_url(), this);
+        if(beer.getImageLocation() != null)
+            Util.setImageViewContentByUrl(photoField, beer.getImageLocation(), this);
         else
             photoField.setImageResource(R.drawable.placeholder);
 

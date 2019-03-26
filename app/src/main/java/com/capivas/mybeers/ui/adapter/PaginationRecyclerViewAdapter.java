@@ -205,8 +205,8 @@ public class PaginationRecyclerViewAdapter extends RecyclerView.Adapter<Recycler
         }
 
         private void updateImageUrl(Beer beer) {
-            if(beer.getImage_url() != null)
-                Util.setImageViewContentByUrl(photoField, beer.getImage_url(), context);
+            if(beer.getImageLocation() != null)
+                Util.setImageViewContentByUrl(photoField, beer.getImageLocation(), context);
             else
                 photoField.setImageResource(R.drawable.placeholder);
         }

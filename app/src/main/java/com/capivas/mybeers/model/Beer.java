@@ -1,5 +1,7 @@
 package com.capivas.mybeers.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class Beer implements Serializable {
@@ -7,7 +9,8 @@ public class Beer implements Serializable {
     private String name;
     private String tagline;
     private String description;
-    private String image_url;
+    @SerializedName("image_url")
+    private String imageLocation;
     private boolean isFavorite = false;
 
     public Beer() {
@@ -19,7 +22,7 @@ public class Beer implements Serializable {
         this.name = name;
         this.tagline = tagline;
         this.description = description;
-        this.image_url = image_url;
+        this.imageLocation = image_url;
     }
 
     public Long getId() {
@@ -54,12 +57,12 @@ public class Beer implements Serializable {
         this.description = description;
     }
 
-    public String getImage_url() {
-        return image_url;
+    public String getImageLocation() {
+        return imageLocation;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
+    public void setImageLocation(String imageLocation) {
+        this.imageLocation = imageLocation;
     }
 
     public boolean isFavorite() {
