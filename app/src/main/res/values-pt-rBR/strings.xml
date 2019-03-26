@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyBeers</string>
+    <string name="home_screen_title">Lista de Cervejas</string>
+    <string name="detail_screen_title">Detalhes</string>
+    <string name="list_item_photo_description">Uma garrafa de cerveja</string>
+    <string name="menu_home_detail">Detalhe</string>
+    <string name="home_menu_search">Buscar</string>
+    <string name="search_hint">Buscar cervejas...</string>
+    <string name="search_no_results">Nenhum resultado foi encontrado</string>
+    <string name="list_item_favorite_icon_description">Ícone Favorito</string>
+    <string name="home_menu_favorites">Favoritos</string>
+    <string name="favorites_screen_title">Favoritos</string>
+    <string name="no_internet_connection">Sem conexão com a internet</string>
+</resources>
