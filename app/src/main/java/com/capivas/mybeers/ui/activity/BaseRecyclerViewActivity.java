@@ -25,6 +25,7 @@ public abstract class BaseRecyclerViewActivity extends AppCompatActivity {
     protected ProgressBar progressBar;
     protected PaginationRecyclerViewAdapter adapter;
     protected View noSearchResultsView;
+    protected View noInternetConnection;
 
     protected boolean isLoading = false;
     protected boolean isLastPage = false;
@@ -44,6 +45,7 @@ public abstract class BaseRecyclerViewActivity extends AppCompatActivity {
         beersRecyclerView = findViewById(R.id.home_beers_list);
         progressBar = findViewById(R.id.home_progress_bar);
         noSearchResultsView = findViewById(R.id.home_search_fail);
+        noInternetConnection = findViewById(R.id.home_no_internet);
     }
 
     protected final void updateRecyclerView(List<Beer> beers) {

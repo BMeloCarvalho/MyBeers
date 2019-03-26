@@ -58,12 +58,12 @@ public class BeerDAO extends SQLiteOpenHelper {
 
     public List<Beer> getPage(int page, int max_per_page) {
         Cursor c = getAll();
-        int startPosition = page + ((page - 1) * max_per_page);
+        int startPosition = 1 + ((page - 1) * max_per_page);
         int endPosition = startPosition + (max_per_page - 1);
-        int position = 1;
+        int currentPosition = 1;
         List<Beer> beers = new ArrayList<>();
         while (c.moveToNext()) {
-            if(position >= startPosition && position <= endPosition) {
+            if(currentPosition >= startPosition && currentPosition <= endPosition) {
                 Beer beer = new Beer();
                 beer.setId(c.getLong(c.getColumnIndex("id")));
                 beer.setName(c.getString(c.getColumnIndex("name")));
@@ -73,6 +73,7 @@ public class BeerDAO extends SQLiteOpenHelper {
                 beer.setIsFavorite(true);
                 beers.add(beer);
             }
+            currentPosition++;
         }
         return beers;
     }

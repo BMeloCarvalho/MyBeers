@@ -3,11 +3,14 @@ package com.capivas.mybeers.ui.activity;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.SearchView;
 
 import com.capivas.mybeers.R;
@@ -25,9 +28,16 @@ public class HomeActivity extends BaseRecyclerViewActivity {
     private SearchView searchView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        loadNextPage();
+    protected void onResume() {
+        super.onResume();
+        if(isOnline()) {
+            loadNextPage();
+        } else {
+            adapter.clear();
+            progressBar.setVisibility(View.GONE);
+            noInternetConnection.setVisibility(View.VISIBLE);
+        }
+
     }
 
     @Override
@@ -58,14 +68,20 @@ public class HomeActivity extends BaseRecyclerViewActivity {
 
     @Override
     protected void loadNextPage() {
+        if(isOnline()) {
+            getBeersFromWebService();
+        }
+    }
+
+    private void getBeersFromWebService() {
         Call<List<Beer>> call = getCall();
         call.enqueue(new Callback<List<Beer>>() {
             @Override
             public void onResponse(Call<List<Beer>> call, Response<List<Beer>> response) {
                 List<Beer> beers = response.body();
                 BeerDAO dao = new BeerDAO(HomeActivity.this);
-                for(Beer beer : beers) {
-                    if(dao.exists(beer))
+                for (Beer beer : beers) {
+                    if (dao.exists(beer))
                         beer.setIsFavorite(true);
                 }
                 dao.close();
@@ -77,9 +93,17 @@ public class HomeActivity extends BaseRecyclerViewActivity {
 
             @Override
             public void onFailure(Call<List<Beer>> call, Throwable t) {
-                Log.e("onFailure", "Requisition failure");
+                Log.e("onFailure", "Requisition failure. msg: " + t.getMessage());
             }
         });
+    }
+
+    private boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 
     @Override
@@ -107,9 +131,9 @@ public class HomeActivity extends BaseRecyclerViewActivity {
 
     private Call<List<Beer>> getCall() {
         if(currentQuery != null && !currentQuery.isEmpty())
-            return RetrofitWrapper.getBeerService().list(currentPage, MAX_PER_PAGE, currentQuery);
+            return new RetrofitWrapper().getBeerService().list(currentPage, MAX_PER_PAGE, currentQuery);
         else
-            return RetrofitWrapper.getBeerService().list(currentPage, MAX_PER_PAGE);
+            return new RetrofitWrapper().getBeerService().list(currentPage, MAX_PER_PAGE);
     }
 
     private void configSearchAction(Menu menu) {

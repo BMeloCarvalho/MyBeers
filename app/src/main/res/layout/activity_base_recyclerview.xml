@@ -42,4 +42,28 @@
             android:textColor="@android:color/black"
             android:text="@string/search_no_results"/>
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/home_no_internet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        android:layout_centerInParent="true">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true"
+            android:tint="@android:color/black"
+            android:src="@drawable/ic_no_internet"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="@string/no_internet_connection"/>
+    </LinearLayout>
 </RelativeLayout>
