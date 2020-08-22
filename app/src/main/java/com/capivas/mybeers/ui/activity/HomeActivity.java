@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +29,7 @@ public class HomeActivity extends BaseRecyclerViewActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if(isOnline()) {
+        if (isOnline()) {
             loadNextPage();
         } else {
             adapter.clear();
@@ -53,7 +52,7 @@ public class HomeActivity extends BaseRecyclerViewActivity {
 
     @Override
     public void onBackPressed() {
-        if(currentQuery == null) {
+        if (currentQuery == null) {
             super.onBackPressed();
         } else {
             currentQuery = null;
@@ -68,7 +67,7 @@ public class HomeActivity extends BaseRecyclerViewActivity {
 
     @Override
     protected void loadNextPage() {
-        if(isOnline()) {
+        if (isOnline()) {
             getBeersFromWebService();
         }
     }
@@ -109,7 +108,11 @@ public class HomeActivity extends BaseRecyclerViewActivity {
     @Override
     protected void onFavoriteItemButtomClick(Beer beer) {
         BeerDAO dao = new BeerDAO(HomeActivity.this);
-        dao.save(beer);
+        if (beer.isFavorite()) {
+            dao.save(beer);
+        } else {
+            dao.delete(beer);
+        }
         dao.close();
     }
 
@@ -130,7 +133,7 @@ public class HomeActivity extends BaseRecyclerViewActivity {
     }
 
     private Call<List<Beer>> getCall() {
-        if(currentQuery != null && !currentQuery.isEmpty())
+        if (currentQuery != null && !currentQuery.isEmpty())
             return new RetrofitWrapper().getBeerService().list(currentPage, MAX_PER_PAGE, currentQuery);
         else
             return new RetrofitWrapper().getBeerService().list(currentPage, MAX_PER_PAGE);
@@ -144,7 +147,7 @@ public class HomeActivity extends BaseRecyclerViewActivity {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                if(!query.isEmpty()) {
+                if (!query.isEmpty()) {
                     currentQuery = query;
                     resetBeersList();
                 }
